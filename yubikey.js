@@ -155,7 +155,18 @@ function chunk_buffer(data) {
 
   webusb.requestDevice = function() {
     var filters = [
-      { vendorId: 0x1050, productId: 0x0111 }
+      { 
+	// NEO
+	vendorId: 0x1050, productId: 0x0111, // OTP+CCID
+        vendorId: 0x1050, productId: 0x0112, // CCID
+        vendorId: 0x1050, productId: 0x0115, // U2F+CCID
+        vendorId: 0x1050, productId: 0x0116, // OTP+U2F+CCID
+	// YK 5
+	vendorId: 0x1050, productId: 0x0404, // CCID
+	vendorId: 0x1050, productId: 0x0405, // OTP+CCID
+	vendorId: 0x1050, productId: 0x0406, // FIDO+CCID
+	vendorId: 0x1050, productId: 0x0407  // OTP+FIDO+CCID
+      }
     ];
     return navigator.usb.requestDevice({filters: filters}).then(device => {
       return findOrCreateDevice(device);
